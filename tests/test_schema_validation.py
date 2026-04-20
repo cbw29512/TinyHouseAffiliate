@@ -21,7 +21,7 @@ from core.schema import AssetRole, ContentPackage, ProviderConfig
 def load_json(path: str) -> Any:
     """Load a repository-local JSON fixture."""
 
-    with Path(path).open("r", encoding="utf-8") as file:
+    with Path(path).open("r", encoding="utf-8-sig") as file:
         return json.load(file)
 
 

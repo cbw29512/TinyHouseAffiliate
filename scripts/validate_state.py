@@ -13,12 +13,22 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import Any, Type
 
 from pydantic import BaseModel, ValidationError
 
-from core.schema import ContentPackage, ProviderConfig
+
+# Why this exists:
+# Running `python scripts/validate_state.py` sets sys.path[0] to scripts/.
+# We insert the repository root so `from core.schema import ...` works reliably.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from core.schema import ContentPackage, ProviderConfig  # noqa: E402
 
 
 logging.basicConfig(
@@ -33,7 +43,7 @@ def load_json(path: Path) -> Any:
     """Read a JSON file and return parsed Python data."""
 
     try:
-        with path.open("r", encoding="utf-8") as file:
+        with path.open("r", encoding="utf-8-sig") as file:
             return json.load(file)
     except FileNotFoundError as exc:
         logger.exception("JSON file not found: %s", path)
@@ -47,10 +57,7 @@ def validate_model(model_cls: Type[BaseModel], data: Any) -> BaseModel:
     """
     Validate data against a Pydantic model.
 
-    Why this helper exists:
-    - Pydantic v2 uses model_validate.
-    - Pydantic v1 used parse_obj.
-    - This keeps the script easier to run across environments.
+    This supports Pydantic v2 first, while retaining v1 compatibility.
     """
 
     try:
@@ -85,11 +92,8 @@ def main() -> int:
     args = parser.parse_args()
 
     try:
-        content_path = Path(args.content_package)
-        provider_path = Path(args.provider_config)
-
-        content_data = load_json(content_path)
-        provider_data = load_json(provider_path)
+        content_data = load_json(Path(args.content_package))
+        provider_data = load_json(Path(args.provider_config))
 
         content_package = validate_model(ContentPackage, content_data)
         provider_config = validate_model(ProviderConfig, provider_data)
