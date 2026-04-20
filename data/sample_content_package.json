@@ -1,0 +1,53 @@
+﻿{
+  "home": {
+    "provider_key": "craftsman_tiny_homes",
+    "model_name": "The Summit - Modular ADU",
+    "slug": "the-summit-modular-adu",
+    "source_url": "https://example.com/tiny-homes/the-summit",
+    "price_text": "Contact provider for current pricing.",
+    "square_feet_text": "Unknown",
+    "dimensions_text": "Unknown",
+    "short_description": "Example tiny-home model used for local schema validation only.",
+    "features": [
+      "Modular ADU",
+      "Tiny-home living",
+      "Example validation record"
+    ],
+    "assets": [
+      {
+        "source_url": "https://example.com/images/the-summit-hero.jpg",
+        "role": "hero",
+        "order": 0,
+        "local_path": null,
+        "alt_text": "Front hero image placeholder for The Summit Modular ADU"
+      },
+      {
+        "source_url": "https://example.com/images/the-summit-gallery-1.jpg",
+        "role": "gallery",
+        "order": 1,
+        "local_path": null,
+        "alt_text": "Gallery image placeholder for The Summit Modular ADU"
+      }
+    ],
+    "affiliate_url": null,
+    "cta_text": "Check the description to learn more or request information."
+  },
+  "accessory_kit": {
+    "kit_name": "Starter Tiny Home Essentials",
+    "home_slug": "the-summit-modular-adu",
+    "products": [
+      {
+        "category": "storage",
+        "title": "Compact under-bed storage bins",
+        "search_phrase": "compact under bed storage bins tiny home",
+        "asin": null,
+        "why_it_fits": "Tiny homes need hidden storage that does not consume floor space.",
+        "priority": 80,
+        "affiliate_url": null
+      }
+    ]
+  },
+  "youtube_title": "The Summit Modular ADU | Tiny Home Walkthrough Concept",
+  "youtube_description": "Example metadata for schema validation. Do not publish without provider approval and affiliate disclosure.",
+  "landing_page_path": "site/the-summit-modular-adu/index.html"
+}

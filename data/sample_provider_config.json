@@ -1,0 +1,9 @@
+﻿{
+  "provider_key": "craftsman_tiny_homes",
+  "provider_name": "Craftsman Tiny Homes",
+  "base_url": "https://example.com",
+  "allowed_model_urls": [
+    "https://example.com/tiny-homes/the-summit"
+  ],
+  "notes": "Example provider config only. Verify real affiliate terms, scraping permission, and image usage rights before production use."
+}
