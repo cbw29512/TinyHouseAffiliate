@@ -28,10 +28,14 @@ def load_json(path: str) -> Any:
 def validate_model(model_cls: Type[BaseModel], data: Any) -> BaseModel:
     """Support both Pydantic v1 and v2 validation APIs."""
 
-    if hasattr(model_cls, "model_validate"):
-        return model_cls.model_validate(data)
-
-    return model_cls.parse_obj(data)
+    try:
+        # Try Pydantic v2 API first
+        if hasattr(model_cls, "model_validate"):
+            return model_cls.model_validate(data)
+        # Fallback to Pydantic v1 API
+        return model_cls.parse_obj(data)
+    except Exception as exc:
+        raise ValueError(f"Failed to validate {model_cls.__name__} with data: {data}") from exc
 
 
 def test_content_package_sample_validates() -> None:
